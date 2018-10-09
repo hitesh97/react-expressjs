@@ -7,10 +7,11 @@ class ListItemView extends Component {
     const { viewItem, match } = this.props;
     viewItem(match.params.name);
   }
+
   render() {
     const { item } = this.props;
     if (!item) {
-      return (<div>Loading...</div>);
+      return <div>Loading...</div>;
     }
 
     return (
@@ -18,8 +19,8 @@ class ListItemView extends Component {
         <Link to="/">
           <button type="button">Back</button>
         </Link>
-        <h2>{ item.name }</h2>
-        <p>{ item.description }</p>
+        <h2>{item.name}</h2>
+        <p>{item.description}</p>
       </div>
     );
   }

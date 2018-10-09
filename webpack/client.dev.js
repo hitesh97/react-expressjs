@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -15,17 +15,18 @@ module.exports = {
   ],
   mode: 'development',
   output: {
-    path: path.join(__dirname, '../server/public'),
+    path: path.join(__dirname, '../build/public'),
     filename: './js/index.js',
     publicPath: '/',
   },
   devServer: {
     hot: true,
     publicPath: '/',
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -37,16 +38,16 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
             loader: 'file-loader',
-            options: {}  
-          }
-        ]
+            options: {},
+          },
+        ],
       },
     ],
   },

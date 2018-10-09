@@ -13,10 +13,16 @@ const ListItemPreview = ({ item }) => {
   }
   return (
     <div className="preview">
-      <h2> { item.name } </h2>
-      <p>{ item.description }</p>
+      <h2>
+        {' '}
+        {item.name}
+        {' '}
+      </h2>
+      <p>{item.description}</p>
       <Link to={`view/${item.name}`}>
-        <button type="button" className="btn btn-primary">Read More</button>
+        <button type="button" className="btn btn-primary">
+          Read More
+        </button>
       </Link>
     </div>
   );

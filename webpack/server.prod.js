@@ -2,17 +2,16 @@ const path = require('path');
 const webpack = require('webpack');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, '../server'),
   devtool: 'source-map',
-  entry: [
-    './routes/index.js',
-  ],
+  entry: ['./routes/index.js'],
   mode: 'production',
   target: 'node',
   output: {
-    path: path.join(__dirname, '../server/bin'),
+    path: path.join(__dirname, '../build/server'),
     filename: './server.js',
   },
   externals: [nodeExternals()],
@@ -36,20 +35,21 @@ module.exports = {
             options: {
               outputPath: 'images/',
               emitFile: false,
-            }  
-          }
-        ]
+            },
+          },
+        ],
       },
     ],
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
+        NODE_ENV: JSON.stringify('production'),
+      },
     }),
     new UglifyJSPlugin({
-      sourceMap: true
+      sourceMap: true,
     }),
-  ]
+    new CopyWebpackPlugin([{ from: '../server/views', to: 'views' }]),
+  ],
 };

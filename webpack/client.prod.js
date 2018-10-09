@@ -6,18 +6,16 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   context: path.join(__dirname, '../client'),
   devtool: 'source-map',
-  entry: [
-    './src/index.js',
-    './res/scss/main.scss',
-  ],
+  entry: ['./src/index.js', './res/scss/main.scss'],
   mode: 'production',
   output: {
-    path: path.join(__dirname, '../server/public'),
+    path: path.join(__dirname, '../build/server/public'),
     filename: './js/index.js',
     publicPath: '/',
   },
   module: {
-    rules: [{
+    rules: [
+      {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
@@ -36,23 +34,25 @@ module.exports = {
       },
       {
         test: /\.(png|jpg|gif)$/,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            outputPath: 'images/',
-          }
-        }]
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              outputPath: 'images/',
+            },
+          },
+        ],
       },
     ],
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production')
-      }
+        NODE_ENV: JSON.stringify('production'),
+      },
     }),
     new UglifyJSPlugin({
-      sourceMap: true
+      sourceMap: true,
     }),
     new ExtractTextPlugin('css/main.css'),
   ],
